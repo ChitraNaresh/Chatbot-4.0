@@ -145,93 +145,95 @@ class ChatPage extends Component {
     } = this.state
     return (
       <div className="chat-page-container">
+        <div className="show-component">
+          <ShowUsers
+            usersList={user_list}
+            changeOfficeChat={this.onChangeOffice}
+            specificOfficeId={initialId}
+            officesNames={officesNames}
+          />
+        </div>
         {noUsers && (
           <ul className="users-names-list">
             <li className="users-list-heading">USERS</li>
             {usersList.map(eachUservalue => this.renderEachUser(eachUservalue))}
           </ul>
         )}
-        <div className="header-card">
-          <BsThreeDots className="three-btn" onClick={this.onClickMenu} />
-        </div>
-        <div className="chat-body">
-          <div>
-            <div className="chat-body-header">
-              <div className="instructions-card">
-                <h1 className="body-header-heading">{officeText}</h1>
-                <p className="body-header-description">
-                  This Channel is For Company Wide Chatter
-                </p>
-              </div>
-              <div>
-                <div className="users-icon-number">
-                  <p className="users-number"> {user_list.length} | 100</p>
-                  <div>
-                    <FiUsers className="users-icon" />
+        <div className="chat-main-body">
+          <div className="header-card">
+            <BsThreeDots className="three-btn" onClick={this.onClickMenu} />
+          </div>
+          <div className="chat-body">
+            <div>
+              <div className="chat-body-header">
+                <div className="instructions-card">
+                  <h1 className="body-header-heading">{officeText}</h1>
+                  <p className="body-header-description">
+                    This Channel is For Company Wide Chatter
+                  </p>
+                </div>
+                <div>
+                  <div className="users-icon-number">
+                    <p className="users-number"> {user_list.length} | 100</p>
+                    <div>
+                      <FiUsers className="users-icon" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <hr />
-            {isMenu && (
-              <ShowUsers
-                usersList={user_list}
-                changeOfficeChat={this.onChangeOffice}
-                specificOfficeId={initialId}
-                officesNames={officesNames}
-              />
-            )}
-            <div className="show-component">
-              <ShowUsers
-                usersList={user_list}
-                changeOfficeChat={this.onChangeOffice}
-                specificOfficeId={initialId}
-                officesNames={officesNames}
-              />
-            </div>
-          </div>
-          <div>
-            <div className="user-text-container">
-              {userMessages.length === 0 ? (
-                <p className="show-send-msg">Send Messages!</p>
-              ) : (
-                this.renderMessages()
+              <hr />
+              {isMenu && (
+                <ShowUsers
+                  usersList={user_list}
+                  changeOfficeChat={this.onChangeOffice}
+                  specificOfficeId={initialId}
+                  officesNames={officesNames}
+                />
               )}
-              <div className="emoji-container">
-                <div className="emoji-card-container">
-                  {showEmoji && (
-                    <EmojiPicker
-                      onEmojiClick={this.onClickEmoji}
-                      className="emoji-card"
-                    />
-                  )}
+            </div>
+            <div>
+              <div className="user-text-container">
+                {userMessages.length === 0 ? (
+                  <p className="show-send-msg">Send Messages!</p>
+                ) : (
+                  this.renderMessages()
+                )}
+                <div className="emoji-container">
+                  <div className="emoji-card-container">
+                    {showEmoji && (
+                      <EmojiPicker
+                        onEmojiClick={this.onClickEmoji}
+                        className="emoji-card"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="search-card">
-              <input
-                type="text"
-                placeholder="Type Message"
-                className="input-el"
-                value={userInput}
-                onChange={this.onChangeInput}
-              />
-              <div className="send-smile-card">
-                <button className="show-users-btn" onClick={this.onClickShow}>
-                  @
-                </button>
-                <BsEmojiSmile
-                  className="input-smile-emoji"
-                  onClick={this.onClickShowEmoji}
+              <div className="search-card">
+                <input
+                  type="text"
+                  placeholder="Type Message"
+                  className="input-el"
+                  value={userInput}
+                  onChange={this.onChangeInput}
                 />
-                {userInput.length > 0 ? (
-                  <BiSend
+                <div className="send-smile-card">
+                  <button className="show-users-btn" onClick={this.onClickShow}>
+                    @
+                  </button>
+                  <BsEmojiSmile
                     className="input-smile-emoji"
-                    onClick={this.onSendBtn}
+                    onClick={this.onClickShowEmoji}
                   />
-                ) : (
-                  <span className="body-header-heading">Hi!</span>
-                )}
+                  {userInput.length > 0 ? (
+                    <BiSend
+                      className="input-smile-emoji"
+                      onClick={this.onSendBtn}
+                    />
+                  ) : (
+                    <span className="body-header-heading">Hi!</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
